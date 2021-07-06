@@ -1,0 +1,29 @@
+﻿.container {
+    max-width: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-image: url(../../images/app/background-photo.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+.form-horizontal {
+    margin-top: 60px;
+    padding-top: 10px;
+    border: solid 2px cadetblue;
+    background-color:white;
+}
+
+.login-header {
+    font-family: 'cwTeXKai', serif;
+    line-height:2;
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+}

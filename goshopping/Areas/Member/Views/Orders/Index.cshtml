@@ -1,0 +1,95 @@
+﻿@using DevStudio.Securitys;
+@using goshopping.Models;
+@{
+    if (UserAccount.UserCode == 0)
+    { ViewBag.Title = "會員訂單查詢 / 未結訂單查詢"; }
+    else
+    { ViewBag.Title = "會員訂單查詢 / 歷史訂單查詢"; }
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th></th>
+                <th>訂單編號</th>
+                <th>訂單日期</th>
+                <th>訂單狀態</th>
+                <th>付款方式</th>
+                <th>運送方式</th>
+                <th>收件人</th>
+                <th>收件地址</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@if (ViewBag.OrderNo != null)
+{
+    List<OrdersDetail> models = (List<OrdersDetail>)ViewBag.OrderDetail;
+    if (models.Count > 0)
+    {
+        <hr />
+        string str_image_url = "";
+        <section class="pt-5 pb-5">
+            <div class="container">
+                <div class="row w-100">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <h3 class="display-5 mb-2 text-center" style="font-weight:bold">訂單：@ViewBag.OrderNo</h3>
+                        <p class="mb-5 text-center">
+                            <i class="text-info font-weight-bold">@models.Count()</i> 項商品
+                        </p>
+                        <table id="shoppingCart" class="table table-condensed table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:70%">購買商品</th>
+                                    <th style="width:10%">單價</th>
+                                    <th style="width:10%">數量</th>
+                                    <th style="width:10%">小計</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in models)
+                                {
+                                    str_image_url = string.Format("~/Images/product/{0}/{1}.jpg", item.product_no, item.product_no);
+                                    <tr>
+                                        <td data-th="Product">
+                                            <div class="row">
+                                                <div class="col-md-3 text-left">
+                                                    <img src="@Url.Content(str_image_url)" alt="@item.product_no" class="img-fluid d-none d-md-block rounded mb-2 shadow">
+                                                </div>
+                                                <div class="col-md-9 text-left mt-sm-2">
+                                                    <h6>@item.product_name</h6>
+                                                    <p class="font-weight-light">@item.product_spec</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td data-th="Price">$@item.price</td>
+                                        <td data-th="Price">@item.qty</td>
+                                        <td data-th="Price">@item.amount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="float-right text-right">
+                            <h4 style="font-weight:bold;">
+                                合計金額:<span style="color:red;">$@models.Sum(m => m.amount)</span>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+@if (UserAccount.UserCode == 0)
+{
+    <script src="@Url.Content("~/Scripts/apps/member/unclose_order.js")"></script>}
+else
+{
+    <script src="@Url.Content("~/Scripts/apps/member/history_order.js")"></script>
+}
+

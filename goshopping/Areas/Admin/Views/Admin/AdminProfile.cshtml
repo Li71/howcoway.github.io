@@ -1,0 +1,67 @@
+﻿@using DevStudio.Securitys;
+@model goshopping.Models.Users
+
+@{
+    ViewBag.Title = "帳號資料管理 / 帳號明細";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+@if (!UserAccount.UploadImageMode)
+{
+    <div>
+        <div class="row">
+            <div class="col-2">
+                <img src="@Url.Content(@UserAccount.UserImageUrl)" class="user-profile-image" />
+            </div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-12 control-label control-header">
+                        <span class="control-caption">@Html.DisplayNameFor(m => m.mno)：</span>@Html.DisplayFor(m => m.mno)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 control-label control-header">
+                        <span class="control-caption">@Html.DisplayNameFor(m => m.mname)：</span>@Html.DisplayFor(m => m.mname)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 control-label control-header">
+                        <span class="control-caption">@Html.DisplayNameFor(m => m.email)：</span>@Html.DisplayFor(m => m.email)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 control-label control-header">
+                        <span class="control-caption">@Html.DisplayNameFor(m => m.birthday)：</span>@Html.DisplayFor(m => m.birthday)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 control-label control-header">
+                        <span class="control-caption">@Html.DisplayNameFor(m => m.remark)：</span>@Html.DisplayFor(m => m.remark)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <p>
+            @Html.ActionLink("編輯帳號", "EditProfile", "Admin", new { area = "Admin" }, new { @class = "btn btn-success form-button" })
+            @Html.ActionLink("上傳圖像", "UploadImage", "Admin", new { area = "Admin" }, new { @class = "btn btn-success form-button" })
+        </p>
+    </div>
+}
+else
+{
+    <div>
+        <h3>帳號圖像上傳</h3>
+        <hr />
+        @using (Html.BeginForm("Upload", "Admin", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="file" name="file" id="file" class="form-control" />
+            <input type="submit" value="上傳檔案" class="btn btn-primary form-control" />
+        }
+        @Html.ActionLink("返回" , "UploadCancel" , "Admin" , new { area="Admin"} , new { @class="btn btn-success form-button"})
+    </div>
+}
+
+
+

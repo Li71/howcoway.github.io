@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "VerifyEmail";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@if (ViewBag.Status)
+{
+    <p>恭喜你, 已經完成會員帳號驗證, 請重新登入!!</p>
+}
+else
+{
+    <p>@ViewBag.Message</p>
+}
+
+
+

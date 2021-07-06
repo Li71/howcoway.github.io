@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAO</title>
+    <link href="@Url.Content("~/Content/outside/index.css")" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+
+    <div class="container" data-0p="transform:translate(0%,0%);" data-200p="transform:translate(0%,0%);"
+         data-400p="transform:translate(0%,0%);" " data-500p="transform:translate(-100%,0%);"
+         data-1100p="transform:translate(-100%,0%);" data-1200p="transform:translate(-200%,0%);">
+
+        <section>
+            <div class="hint_icon">
+                <img class="arrow" src="@Url.Content("~/Content/outside/img/arrow.png")" alt="down">
+            </div>
+            <div id="particles-js" data-0p="visibility:visible;" data-30p="visibility:visible; opacity:0;" data-100p="opacity:1;" data-250p="opacity:1;"
+                 data-299p="display:block; opacity:0;" data-300p="display:none;"></div>
+            <div class="steam">
+
+                <div class="steam-top" data-0p="transform:translateX(0px); opacity:1;" data-40p="opacity:1;" data-60p="transform:translateX(500px); opacity:0;">
+                    <img src="@Url.Content("~/Content/outside/img/steam_top.png")" />
+                </div>
+                <div class="steam-but" data-0p="opacity:1;" data-80p="opacity:1;" data-120p="opacity:0;">
+                    <img src="@Url.Content("~/Content/outside/img/steam_but.png")" />
+                </div>
+
+            </div>
+
+            <div class="logo" data-320p="opacity:0;" data-350p="opacity:1;">
+                <img src="@Url.Content("~/Content/outside/img/LOGO_W.png")" />
+            </div>
+            <div class="BG">
+                <img data-290p="transform:translateY(-100px); opacity:0;" data-330p="transform:translateY(0px); opacity:1;" src="@Url.Content("~/Content/outside/img/BG.png")" />
+            </div>
+
+
+
+
+
+
+
+        </section>
+        <section>
+            <div class="BG">
+                <img class="slogan_text" src="@Url.Content("~/Content/outside/img/slogan/t1.png")" data-580p="opacity:0;" data-650p="opacity:1;" data-700p="opacity:0;">
+                <img class="slogan_text" src="@Url.Content("~/Content/outside/img/slogan/t2.png")" data-680p="opacity:0;" data-750p="opacity:1;" data-800p="opacity:0;">
+                <img class="slogan_text" src="@Url.Content("~/Content/outside/img/slogan/t3.png")" data-780p="opacity:0;" data-850p="opacity:1;" data-900p="opacity:0;">
+                <img class="slogan_text" src="@Url.Content("~/Content/outside/img/slogan/t4.png")" data-880p="opacity:0;" data-950p="opacity:1;" data-1000p="opacity:0;">
+                <img class="slogan_text" src="@Url.Content("~/Content/outside/img/slogan/t5.png")" data-980p="opacity:0;" data-1050p="opacity:1;">
+
+                <img class="passerby" src="@Url.Content("~/Content/outside/img/passerby/p1.png")" data-580p="opacity:0;" data-650p="opacity:1;" data-700p="opacity:0;" data-980p="opacity:0;" data-1050p="opacity:1;">
+                <img class="passerby" src="@Url.Content("~/Content/outside/img/passerby/p2.png")" data-680p="opacity:0;" data-750p="opacity:1;" data-800p="opacity:0;" data-980p="opacity:0;" data-1050p="opacity:1;">
+                <img class="passerby" src="@Url.Content("~/Content/outside/img/passerby/p3.png")" data-780p="opacity:0;" data-850p="opacity:1;" data-900p="opacity:0;" data-980p="opacity:0;" data-1050p="opacity:1;">
+                <img class="passerby" src="@Url.Content("~/Content/outside/img/passerby/p4.png")" data-880p="opacity:0;" data-950p="opacity:1;" data-1000p="opacity:0;" data-980p="opacity:0;" data-1050p="opacity:1;">
+
+                <div class="white" data-550p="opacity:0;" data-650p="opacity:1;" "></div>
+                <img data-450p="transform:translateY(-100px); opacity:0;" data-520p="transform:translateY(0px); opacity:1;" src="@Url.Content("~/Content/outside/img/bg_test2.jpg")" />
+            </div>
+
+
+        </section>
+        <section>
+            <div>
+                <a class="navbar-brand" href="/Home/Index" target="_blank">
+                    <img class="go_shop" src="@Url.Content("~/Content/outside/img/goshop_but.png")">
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script src="@Url.Content("~/Content/outside/js/particle.js")" defer="defer"></script>
+    <script src="@Url.Content("~/Content/outside/js/app.js")" defer="defer"></script>
+
+    <!-- <script src="js/lib/stats.js"></script> -->
+    <script>
+        particlesJS.load('particles-js', 'particles.json', function () {
+            console.log('particles.js loaded - callback');
+        });
+
+        // var count_particles, stats, update;
+        // stats = new Stats;
+        // stats.setMode(0);
+        // stats.domElement.style.position = 'absolute';
+        // stats.domElement.style.left = '0px';
+        // stats.domElement.style.top = '0px';
+        // document.body.appendChild(stats.domElement);
+        // count_particles = document.querySelector('.js-count-particles');
+        // update = function() {
+        //   stats.begin();
+        //   stats.end();
+        //   if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+        //     count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        //   }
+        //   requestAnimationFrame(update);
+        // };
+        // requestAnimationFrame(update);
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Content/outside/js/skrollr.js")">
+    </script>
+
+    <script type="text/javascript">
+        var s = skrollr.init();
+    </script>
+</body>
+
+</html>

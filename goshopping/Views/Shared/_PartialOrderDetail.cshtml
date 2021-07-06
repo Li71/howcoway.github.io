@@ -1,0 +1,42 @@
+﻿@using DevStudio.Securitys;
+@model IEnumerable<goshopping.Models.OrdersDetail>
+@{
+    ViewBag.Title = "訂單明細查詢";
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+    string str_area = "Admin";
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Member) { str_area = "Member"; }
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Vendor) { str_area = "Vendor"; }
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Admin) { str_area = "Admin"; }
+}
+
+@using (Html.BeginForm("Details", "Orders", new { area = str_area }, FormMethod.Post, new { id = "popupForm" }))
+{
+    <span class="control-label">訂單編號：@ViewBag.OrderNo</span>
+    <div class="col"><hr /></div>
+    <div class="row">
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.product_no)</span></div>
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.product_name)</span></div>
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.product_spec)</span></div>
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.qty)</span></div>
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.price)</span></div>
+        <div class="col"><span class="control-label">@Html.DisplayNameFor(model => model.amount)</span></div>
+    </div>
+    <div class="row">
+        <div class="col"><hr /></div>
+    </div>
+    foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col">@item.product_no</div>
+            <div class="col">@item.product_name</div>
+            <div class="col">@item.product_spec</div>
+            <div class="col">@item.qty.ToString()</div>
+            <div class="col">@item.price.ToString()</div>
+            <div class="col">@item.amount.ToString()</div>
+        </div>
+        <div class="row">
+            <div class="col"><hr /></div>
+        </div>
+    }
+    <span class="control-label">合計金額：@Model.Sum(m => m.amount)</span>
+}

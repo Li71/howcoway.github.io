@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "基本資料管理 / 商品分類設定";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+    int int_pid = int.Parse(Session["CategoryID"].ToString());
+    string str_pids = Session["ParentID"].ToString();
+    string str_pnames = Session["ParentName"].ToString();
+    string str_space = "＞";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    @if (int_pid > 0)
+    {
+        <div>
+            <h3>
+                <b>
+                    上層類別：
+                    @if (!string.IsNullOrEmpty(str_pids))
+                    {
+                        List<string> ids = str_pids.Split(',').ToList();
+                        List<string> names = str_pnames.Split(',').ToList();
+                        for (int i = 0; i < ids.Count; i++)
+                        {
+                            if (i == (ids.Count - 1))
+                            {
+                                <a href="#" class="btn btn-default" style="font-size:large;font-weight:bold;">@names[i] </a>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Category/Index/@ids[i]" class="btn btn-primary" style="font-size:large;font-weight:bold;">@names[i] </a>
+                                <span style="font-size:large;font-weight:bold;">@str_space</span>
+                            }
+                        }
+                    }
+                </b>
+                @Html.ActionLink("回上一層", "ReturnToParent", "Category", new { Area = "Admin" }, new { @class = "btn btn-primary form-button" })
+            </h3>
+        </div>
+        <hr />
+    }
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    <a class="popup" title="新增記錄" href="/Admin/Category/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                </th>
+                <th>編號</th>
+                <th>名稱</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="@Url.Content("~/Scripts/apps/admin/category_index.js")"></script>
+

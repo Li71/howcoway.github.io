@@ -1,0 +1,560 @@
+﻿USE [goshopping]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Products]') AND type in (N'U'))
+ALTER TABLE [dbo].[Products] DROP CONSTRAINT IF EXISTS [DF_Products_start_count]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Products]') AND type in (N'U'))
+ALTER TABLE [dbo].[Products] DROP CONSTRAINT IF EXISTS [DF_Products_browse_count]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Products]') AND type in (N'U'))
+ALTER TABLE [dbo].[Products] DROP CONSTRAINT IF EXISTS [DF_Products_issale]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Products]') AND type in (N'U'))
+ALTER TABLE [dbo].[Products] DROP CONSTRAINT IF EXISTS [DF_Products_ishot]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Products]') AND type in (N'U'))
+ALTER TABLE [dbo].[Products] DROP CONSTRAINT IF EXISTS [DF_Products_istop]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Orders]') AND type in (N'U'))
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT IF EXISTS [DF_Orders_order_validate]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Orders]') AND type in (N'U'))
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT IF EXISTS [DF_Orders_order_closed]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Users]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Status]
+GO
+/****** Object:  Table [dbo].[Shippings]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Shippings]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Roles]
+GO
+/****** Object:  Table [dbo].[Propertys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Propertys]
+GO
+/****** Object:  Table [dbo].[ProductsProperty]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[ProductsProperty]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Products]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Payments]
+GO
+/****** Object:  Table [dbo].[OrdersDetail]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[OrdersDetail]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Orders]
+GO
+/****** Object:  Table [dbo].[Companys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Companys]
+GO
+/****** Object:  Table [dbo].[Categorys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Categorys]
+GO
+/****** Object:  Table [dbo].[Carts]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+DROP TABLE IF EXISTS [dbo].[Carts]
+GO
+/****** Object:  Table [dbo].[Carts]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Carts](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[lot_no] [nvarchar](50) NULL,
+	[user_no] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[qty] [int] NULL,
+	[price] [int] NULL,
+	[amount] [int] NULL,
+	[crete_time] [datetime] NULL,
+ CONSTRAINT [PK_Carts] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categorys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categorys](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[parentid] [int] NULL,
+	[category_no] [nvarchar](50) NULL,
+	[category_name] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Categorys] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Companys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Companys](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[msname] [nvarchar](50) NULL,
+	[mname] [nvarchar](250) NULL,
+	[date_register] [date] NULL,
+	[tel_company] [nvarchar](50) NULL,
+	[fax_company] [nvarchar](50) NULL,
+	[name_charge] [nvarchar](50) NULL,
+	[name_contact] [nvarchar](50) NULL,
+	[tel_contact] [nvarchar](50) NULL,
+	[adr_company] [nvarchar](250) NULL,
+	[email_company] [nvarchar](250) NULL,
+	[url_company] [nvarchar](250) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Companys] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[order_no] [nvarchar](50) NULL,
+	[order_date] [datetime] NULL,
+	[order_status] [nvarchar](50) NULL,
+	[user_no] [nvarchar](50) NULL,
+	[payment_no] [nvarchar](50) NULL,
+	[shipping_no] [nvarchar](50) NULL,
+	[receive_name] [nvarchar](50) NULL,
+	[receive_email] [nvarchar](50) NULL,
+	[receive_address] [nvarchar](250) NULL,
+	[amounts] [int] NULL,
+	[taxs] [int] NULL,
+	[totals] [int] NULL,
+	[remark] [nvarchar](250) NULL,
+	[order_guid] [nvarchar](50) NULL,
+	[order_closed] [int] NULL,
+	[order_validate] [int] NULL,
+ CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrdersDetail]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrdersDetail](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[order_no] [nvarchar](50) NULL,
+	[vendor_no] [nvarchar](50) NULL,
+	[category_name] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[price] [int] NULL,
+	[qty] [int] NULL,
+	[amount] [int] NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_OrdersDetail] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payments](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Payments] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[categoryid] [int] NULL,
+	[category_name] [nvarchar](250) NULL,
+	[istop] [int] NULL,
+	[ishot] [int] NULL,
+	[issale] [int] NULL,
+	[browse_count] [int] NULL,
+	[vendor_no] [nvarchar](50) NULL,
+	[product_no] [nvarchar](50) NULL,
+	[product_name] [nvarchar](250) NULL,
+	[product_spec] [nvarchar](250) NULL,
+	[price_cost] [int] NULL,
+	[price_sale] [int] NULL,
+	[price_discont] [int] NULL,
+	[start_count] [int] NULL,
+	[remark] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductsProperty]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductsProperty](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[product_no] [nvarchar](50) NULL,
+	[property_no] [nvarchar](50) NULL,
+	[text_value] [nvarchar](500) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_ProductsProperty] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Propertys]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Propertys](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[mvalue] [nvarchar](500) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Propertys] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Shippings]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Shippings](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Shippings] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[remark] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Status] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 2021/03/23 星期二 下午 01:02:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[rowid] [int] IDENTITY(1,1) NOT NULL,
+	[mno] [nvarchar](50) NULL,
+	[mname] [nvarchar](50) NULL,
+	[password] [nvarchar](50) NULL,
+	[email] [nvarchar](250) NULL,
+	[role_no] [nvarchar](50) NULL,
+	[birthday] [datetime] NULL,
+	[remark] [nvarchar](250) NULL,
+	[varify_code] [nvarchar](50) NULL,
+	[isvarify] [int] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[rowid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Carts] ON 
+GO
+INSERT [dbo].[Carts] ([rowid], [lot_no], [user_no], [product_no], [product_name], [product_spec], [qty], [price], [amount], [crete_time]) VALUES (1025, N'', N'001', N'109254541845', N'Samsung Note8 8G', N'顏色=紅尺寸=S', 1, 500, 500, CAST(N'2020-12-08T15:52:46.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Carts] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Categorys] ON 
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (1, 0, N'A', N'手機類')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (2, 0, N'B', N'家電類')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (3, 0, N'C', N'服飾類')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (4, 1, N'A01', N'手機空機')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (5, 1, N'A02', N'手機配件')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (6, 1, N'A03', N'手機週邊')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (7, 2, N'B01', N'冷氣')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (8, 2, N'B02', N'冰箱')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (9, 2, N'B03', N'洗衣機')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (10, 3, N'C01', N'男性服飾')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (11, 3, N'C02', N'女性服飾')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (12, 3, N'C03', N'兒童服飾')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (18, 4, N'A0101', N'IPHONE')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (20, 4, N'A0102', N'SAMSUNG')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (21, 4, N'A0103', N'OPPO')
+GO
+INSERT [dbo].[Categorys] ([rowid], [parentid], [category_no], [category_name]) VALUES (22, 7, N'B0101', N'聲寶')
+GO
+SET IDENTITY_INSERT [dbo].[Categorys] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Companys] ON 
+GO
+INSERT [dbo].[Companys] ([rowid], [mno], [msname], [mname], [date_register], [tel_company], [fax_company], [name_charge], [name_contact], [tel_contact], [adr_company], [email_company], [url_company], [remark]) VALUES (1, N'01', N'好好用', N'好好用資訊股份有限公司', CAST(N'2020-01-01' AS Date), N'02-123456789', N'02-123456789', N'王小明', N'李小華', N'02-123456789', N'台北市', N'ming@gmail.com', N'https://www.gooduse.com.tw', N'')
+GO
+SET IDENTITY_INSERT [dbo].[Companys] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Orders] ON 
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (1, N'00000001', CAST(N'2020-11-24T16:23:37.960' AS DateTime), N'OR', N'001', N'01', N'01', N'許志強', N'johnson.ezmail@gmail.com', N'台北市', 5000, 0, 5000, N'', N'6A13A2DA-43E5-4BE8-B757-6', 1, 1)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (2, N'00000002', CAST(N'2020-12-05T16:25:36.923' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 7222, 361, 7583, N'', N'ECE2E173-1FF4-47CA-92E8-A', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (3, N'00000003', CAST(N'2020-12-07T05:49:53.493' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 5300, 265, 5565, N'', N'D218ADA0-ADE1-4FEE-9446-9', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (4, N'00000004', CAST(N'2020-12-07T05:54:05.227' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 0, 0, 0, N'', N'15609C43-93F5-4D8A-8CD5-1', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (5, N'00000005', CAST(N'2020-12-07T06:04:42.420' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 4800, 240, 5040, N'', N'E5C52260-F09C-4CD6-8FDD-C', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (6, N'00000006', CAST(N'2020-12-07T06:06:56.577' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 500, 25, 525, N'', N'41DF27BE-95A4-48DA-AB52-8', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (7, N'00000007', CAST(N'2020-12-07T06:10:20.203' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 500, 25, 525, N'', N'B88FF55F-5E7A-4836-B024-5', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (8, N'00000008', CAST(N'2020-12-07T06:12:48.527' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 500, 25, 525, N'', N'006C4746-E32D-4890-B878-8', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (9, N'00000009', CAST(N'2020-12-07T06:21:46.823' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 500, 25, 525, N'', N'210EEE20-AB16-4622-A9A0-0', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (10, N'00000010', CAST(N'2020-12-07T06:35:49.563' AS DateTime), N'ON', N'', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 12600, 630, 13230, N'', N'2316BEEA-572A-46C9-A971-2', 0, 0)
+GO
+INSERT [dbo].[Orders] ([rowid], [order_no], [order_date], [order_status], [user_no], [payment_no], [shipping_no], [receive_name], [receive_email], [receive_address], [amounts], [taxs], [totals], [remark], [order_guid], [order_closed], [order_validate]) VALUES (11, N'00000011', CAST(N'2020-12-08T06:22:03.797' AS DateTime), N'ON', N'001', N'01', N'01', N'張小明', N'johnson.ezmail@gmail.com', N'台北市中山區信義路一段1號', 12000, 600, 12600, N'', N'60057EE5-F8CA-43F8-982E-5', 0, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Orders] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrdersDetail] ON 
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (1, N'00000001', N'V01', NULL, N'21737107281964', N'Apple iPhone 6s', N'黑色', 5000, 1, 5000, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (2, N'00000001', N'V01', NULL, N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'白色', 12000, 2, 24000, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (3, N'00000002', N'V01', N'手機類/手機空機/IPHONE', N'21737107281964', N'Apple iPhone 6s', N'黑色', 5000, 1, 5000, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (4, N'00000002', N'V01', N'手機類/手機空機/SAMSUNG', N'54643435', N'Apple iPhone 7s', N'顏色:黑色 尺寸:L', 2222, 1, 2222, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (5, N'00000003', N'V03', N'家電類/冷氣/聲寶', N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'', 0, 1, 0, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (6, N'00000003', N'V01', N'手機類/手機空機/SAMSUNG', N'109254541845', N'Samsung Note8 8G', N'', 500, 1, 500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (7, N'00000003', N'V01', N'手機類/手機空機/IPHONE', N'21737107281964', N'Apple iPhone 6s', N'', 4800, 1, 4800, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (8, N'00000004', N'V03', N'家電類/冷氣/聲寶', N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'', 0, 1, 0, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (9, N'00000005', N'V01', N'手機類/手機空機/IPHONE', N'21737107281964', N'Apple iPhone 6s', N'', 4800, 1, 4800, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (10, N'00000006', N'V01', N'手機類/手機空機/SAMSUNG', N'109254541845', N'Samsung Note8 8G', N'', 500, 1, 500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (11, N'00000007', N'V01', N'手機類/手機空機/SAMSUNG', N'109254541845', N'Samsung Note8 8G', N'', 500, 1, 500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (12, N'00000008', N'V01', N'手機類/手機空機/SAMSUNG', N'109254541845', N'Samsung Note8 8G', N'', 500, 1, 500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (13, N'00000009', N'V01', N'手機類/手機空機/SAMSUNG', N'109254541845', N'Samsung Note8 8G', N'', 500, 1, 500, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (14, N'00000010', N'', N'', N'1234', N'12123', N'顏色:黑色 尺寸:L', 600, 1, 600, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (15, N'00000010', N'V03', N'家電類/冷氣/聲寶', N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'', 12000, 1, 12000, N'')
+GO
+INSERT [dbo].[OrdersDetail] ([rowid], [order_no], [vendor_no], [category_name], [product_no], [product_name], [product_spec], [price], [qty], [amount], [remark]) VALUES (16, N'00000011', N'V03', N'家電類/冷氣/聲寶', N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'', 12000, 1, 12000, N'')
+GO
+SET IDENTITY_INSERT [dbo].[OrdersDetail] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Payments] ON 
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (1, N'01', N'信用卡一次付清', NULL)
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (2, N'02', N'ATM轉帳', NULL)
+GO
+INSERT [dbo].[Payments] ([rowid], [mno], [mname], [remark]) VALUES (1005, N'03', N'信用卡分3期', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Payments] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Products] ON 
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [browse_count], [vendor_no], [product_no], [product_name], [product_spec], [price_cost], [price_sale], [price_discont], [start_count], [remark]) VALUES (1, 18, N'手機類/手機空機/IPHONE', 1, 1, 1, 2, N'V01', N'21737107281964', N'Apple iPhone 6s', N'', 3000, 5000, 4800, 3, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [browse_count], [vendor_no], [product_no], [product_name], [product_spec], [price_cost], [price_sale], [price_discont], [start_count], [remark]) VALUES (2, 22, N'家電類/冷氣', 1, 0, 1, 2, N'V03', N'100259441844', N'Samsung Note10 8G/256G(空機) 全新未拆封原廠公司貨20 ULTRA S20+', N'', 8000, 12000, 0, 4, NULL)
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [browse_count], [vendor_no], [product_no], [product_name], [product_spec], [price_cost], [price_sale], [price_discont], [start_count], [remark]) VALUES (4, 20, N'手機類/手機空機/SAMSUNG', 1, 1, 1, 4, N'V01', N'54643435', N'Apple iPhone 7s', N'', 1000, 2222, 0, 5, N'')
+GO
+INSERT [dbo].[Products] ([rowid], [categoryid], [category_name], [istop], [ishot], [issale], [browse_count], [vendor_no], [product_no], [product_name], [product_spec], [price_cost], [price_sale], [price_discont], [start_count], [remark]) VALUES (5, 20, N'手機類/手機空機/SAMSUNG', 1, 0, 1, 0, N'V01', N'109254541845', N'Samsung Note8 8G', N'', 500, 600, 500, 5, N'<p>
+	123</p>
+<h1>
+	<strong><span style="background-color:#ff0000;">ssdf</span></strong></h1>
+<h1>
+	<strong>sdfsdf<img alt="" src="http://localhost:8888/Images/uploads/109254541845/10303-man-office-worker-light-skin-tone-icon (1).png" style="width: 24px; height: 24px;" /></strong></h1>
+<p>
+	<strong><img alt="" src="http://localhost:8888/Images/uploads/109254541845/logo.jpg" style="width: 400px; height: 400px;" /></strong></p>
+')
+GO
+SET IDENTITY_INSERT [dbo].[Products] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ProductsProperty] ON 
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (3, N'109254541845', N'color', N'紅,黑,白,藍,黃', N'test')
+GO
+INSERT [dbo].[ProductsProperty] ([rowid], [product_no], [property_no], [text_value], [remark]) VALUES (5, N'109254541845', N'size', N'S,M,L,XL,XXL,XXL', N'')
+GO
+SET IDENTITY_INSERT [dbo].[ProductsProperty] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Propertys] ON 
+GO
+INSERT [dbo].[Propertys] ([rowid], [mno], [mname], [mvalue], [remark]) VALUES (1, N'size', N'尺寸', N'S,M,L,XL,XXL,XXL', NULL)
+GO
+INSERT [dbo].[Propertys] ([rowid], [mno], [mname], [mvalue], [remark]) VALUES (2, N'color', N'顏色', N'紅,黑,白,藍', N'')
+GO
+SET IDENTITY_INSERT [dbo].[Propertys] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Roles] ON 
+GO
+INSERT [dbo].[Roles] ([rowid], [mno], [mname], [remark]) VALUES (1, N'User', N'會員', NULL)
+GO
+INSERT [dbo].[Roles] ([rowid], [mno], [mname], [remark]) VALUES (2, N'Admin', N'管理者', NULL)
+GO
+INSERT [dbo].[Roles] ([rowid], [mno], [mname], [remark]) VALUES (3, N'Vendor', N'廠商', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Roles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Shippings] ON 
+GO
+INSERT [dbo].[Shippings] ([rowid], [mno], [mname], [remark]) VALUES (1, N'01', N'超商取貨', NULL)
+GO
+INSERT [dbo].[Shippings] ([rowid], [mno], [mname], [remark]) VALUES (2, N'02', N'物流配送', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Shippings] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Status] ON 
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (1, N'ON', N'已下單未付款', N'已下單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (2, N'PP', N'已付款處理中', N'處理中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (3, N'DS', N'已出貨未到店', N'已出貨')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (4, N'SR', N'已到店未領取', N'未領取')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (5, N'PN', N'未付款處理中', N'處理中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (6, N'CP', N'已領取已付款', N'已領取')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (7, N'OP', N'已下單已付款', N'已下單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (8, N'DU', N'已出貨未到府', N'已出貨')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (9, N'HD', N'訂單保留', N'保留中')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (10, N'OR', N'取消訂單', N'取消訂單')
+GO
+INSERT [dbo].[Status] ([rowid], [mno], [mname], [remark]) VALUES (11, N'RT', N'已退貨', N'已退貨')
+GO
+SET IDENTITY_INSERT [dbo].[Status] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (5, N'004', N'王小明', N'nBhQ/KpjLyGJ3qxem2bgL6hb6SqSC2yudpbJtpHkuss=', N'web109btony712@gmail.com', N'Member', CAST(N'2020-10-22T00:00:00.000' AS DateTime), N'', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (6, N'001', N'李小華', N'ej5rFst19I+4l+/zrnMvMVT20gO1PzNmDwG0w7a8Lfk=', N'001@gmail.com', N'Member', CAST(N'2020-10-22T00:00:00.000' AS DateTime), N'', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (7, N'002', N'陳小國', N'ej5rFst19I+4l+/zrnMvMVT20gO1PzNmDwG0w7a8Lfk=', N'002@gmail.com', N'Member', CAST(N'2020-10-22T00:00:00.000' AS DateTime), N'', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (8, N'003', N'徐小風', N'iMBBO/7x0FcKim+ceAqNLJ6QxNEHVR1ivzzsn/H1tjQ=', N'003@gmail.com', N'Member', CAST(N'2020-10-22T00:00:00.000' AS DateTime), N'', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (9, N'admin', N'管理員', N'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', N'admin@gmail.com', N'Admin', CAST(N'2020-10-10T00:00:00.000' AS DateTime), N'', N'7578A43A-64CA-40D7-B5FE-DCC6DB380298', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (10, N'V01', N'大明企業', N'ZKK/qrr7lW2lLauxX0p5beB9vkugG3HAtnCxDBjH+LY=', N'tony.ezmail@gmail.com', N'Vendor', CAST(N'2020-11-22T00:00:00.000' AS DateTime), N'', N'82F9ADA4-4865-49BA-9DB3-D0322742B7A3', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (11, N'V02', N'大華企業', N'ZKK/qrr7lW2lLauxX0p5beB9vkugG3HAtnCxDBjH+LY=', N'tony.ezmail@gmail.com', N'Vendor', CAST(N'2020-11-22T00:00:00.000' AS DateTime), N'', N'82F9ADA4-4865-49BA-9DB3-D0322742B7A3', 1)
+GO
+INSERT [dbo].[Users] ([rowid], [mno], [mname], [password], [email], [role_no], [birthday], [remark], [varify_code], [isvarify]) VALUES (12, N'V03', N'大風企業', N'ZKK/qrr7lW2lLauxX0p5beB9vkugG3HAtnCxDBjH+LY=', N'tony.ezmail@gmail.com', N'Vendor', CAST(N'2020-11-22T00:00:00.000' AS DateTime), N'', N'82F9ADA4-4865-49BA-9DB3-D0322742B7A3', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+ALTER TABLE [dbo].[Orders] ADD  CONSTRAINT [DF_Orders_order_closed]  DEFAULT ((0)) FOR [order_closed]
+GO
+ALTER TABLE [dbo].[Orders] ADD  CONSTRAINT [DF_Orders_order_validate]  DEFAULT ((0)) FOR [order_validate]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_istop]  DEFAULT ((0)) FOR [istop]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_ishot]  DEFAULT ((0)) FOR [ishot]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_issale]  DEFAULT ((1)) FOR [issale]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_browse_count]  DEFAULT ((0)) FOR [browse_count]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_start_count]  DEFAULT ((5)) FOR [start_count]
+GO

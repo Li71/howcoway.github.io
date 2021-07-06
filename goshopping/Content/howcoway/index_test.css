@@ -1,0 +1,45 @@
+﻿body {
+}
+
+
+.howcoway_dark {
+    background-color: #091410;
+    margin-left: 28%;
+    margin-bottom: 10px;
+}
+
+.carousel-indicators li{
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 11px;
+    height: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity .6s ease;
+    border-radius: 50%;
+}
+
+.btn_color {
+    color: #EAF4E2;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+    -ms-flex: 1 1 auto;
+    align-items: center;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.star{
+    margin-left:33%;
+}

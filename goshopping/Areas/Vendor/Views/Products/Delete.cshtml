@@ -1,0 +1,37 @@
+﻿@model goshopping.Models.Products
+
+@{
+    ViewBag.Title = "商品資料刪除";
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@using (Html.BeginForm("Delete", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(model => model.rowid)
+    <div class="control-label control-header control-caption">商品資訊</div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_no, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.product_no != null)
+        {<span class="control-label control-value">@Model.product_no</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.product_name != null)
+        {<span class="control-label control-value">@Model.product_name</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.category_name, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.category_name != null)
+        {<span class="control-label control-value">@Model.category_name</span>}
+    </div>
+    <hr />
+    <div>
+        <input type="submit" value="刪除此筆商品資料" class="btn btn-danger form-button" />
+    </div>
+}

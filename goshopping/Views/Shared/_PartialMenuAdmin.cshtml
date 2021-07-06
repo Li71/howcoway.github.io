@@ -1,0 +1,62 @@
+﻿@{
+    string str_space = "  ";
+}
+<nav class="dash-nav-list">
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-shopping-cart"></i> 會員訂單管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "未結訂單管理", "Index", "Orders", new { Area = "Admin", id = 0, code = 0 }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+            @Html.ActionLink(str_space + "歷史訂單查詢", "Index", "Orders", new { Area = "Admin", id = 0, code = 1 }, new { @class = "dash-nav-dropdown-item  fas fa-search" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-user-friends"></i> 會員資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "待審會員列表", "Index", "Member", new { Area = "Admin", id = 0 }, new { @class = "dash-nav-dropdown-item  fas fa-search" })
+            @Html.ActionLink(str_space + "正式會員列表", "Index", "Member", new { Area = "Admin", id = 1 }, new { @class = "dash-nav-dropdown-item  fas fa-search" })
+            @Html.ActionLink(str_space + "會員資料維護", "Index", "Member", new { Area = "Admin", id = 2 }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-user-tie"></i> 廠商資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "待審廠商列表", "Index", "Vendor", new { Area = "Admin", id = 0 }, new { @class = "dash-nav-dropdown-item  fas fa-search" })
+            @Html.ActionLink(str_space + "正式廠商列表", "Index", "Vendor", new { Area = "Admin", id = 1 }, new { @class = "dash-nav-dropdown-item  fas fa-search" })
+            @Html.ActionLink(str_space + "廠商資料維護", "Index", "Vendor", new { Area = "Admin", id = 2 }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown ">
+        <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-server"></i> 基本資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            <div class="dash-nav-dropdown ">
+                @Html.ActionLink(str_space + "公司資料設定", "Index", "Company", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "商品分類設定", "Index", "Category", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "商品資料設定", "Index", "Products", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "屬性資料設定", "Index", "Propertys", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "付款方式設定", "Index", "Payment", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "運送方式設定", "Index", "Shipping", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+                @Html.ActionLink(str_space + "訂單狀態設定", "Index", "Status", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item  fas fa-edit" })
+            </div>
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-user"></i> 帳號資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "帳號明細", "AdminProfile", "Admin", new { Area = "Admin" }, new { @class = "dash-nav-dropdown-item far fa-file-alt" })
+            @Html.ActionLink(str_space + "重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dash-nav-dropdown-item fas fa-key" })
+        </div>
+    </div>
+    <a href="/User/Login" class="dash-nav-item">
+        <i class="fas fa-sign-out-alt"></i> 登出後台管理專區
+    </a>
+</nav>

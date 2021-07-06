@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "基本資料管理 / 付款方式設定";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    <a class="popup" title="新增記錄" href="/Admin/Payment/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                </th>
+                <th>編號</th>
+                <th>名稱</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="@Url.Content("~/Scripts/apps/admin/payment_index.js")"></script>

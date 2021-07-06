@@ -1,0 +1,39 @@
+﻿@using DevStudio.Securitys;
+@using goshopping.Models;
+@{
+    if (UserAccount.UserCode == 0)
+    { ViewBag.Title = "會員訂單查詢 / 未結訂單查詢"; }
+    else
+    { ViewBag.Title = "會員訂單查詢 / 歷史訂單查詢"; }
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th></th>
+                <th>訂單編號</th>
+                <th>訂單日期</th>
+                <th>訂單狀態</th>
+                <th>會員編號</th>
+                <th>會員姓名</th>
+                <th>付款方式</th>
+                <th>運送方式</th>
+                <th>收件人</th>
+                <th>收件地址</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@if (UserAccount.UserCode == 0)
+{
+    <script src="@Url.Content("~/Scripts/apps/admin/unclose_order.js")"></script>}
+else
+{
+    <script src="@Url.Content("~/Scripts/apps/admin/history_order.js")"></script>
+}
+
+

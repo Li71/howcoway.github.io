@@ -1,0 +1,85 @@
+﻿@using DevStudio;
+
+@model IEnumerable<goshopping.Models.Products>
+
+@{
+    ViewBag.Title = "商品分類";
+    string str_no = ViewBag.CategoryNo.ToString();
+    List<string> list_no = new List<string>();
+    List<string> list_name = new List<string>();
+    int int_count = Shop.GetParentCategoryList(str_no, ref list_no, ref list_name);
+}
+
+<p class="CurrentPosition">
+    <table>
+        <tr>
+            <td>
+                目前位置:
+                @Html.ActionLink("首頁", "Index", "Home")
+                /
+                @{
+                    if (int_count > 0)
+                    {
+                        for (int i = (int_count - 1); i >= 0; i--)
+                        {
+                            if (i == 0)
+                            {@list_name[i]}
+                        else
+                        {<a href="/Product/CategoryList/@list_no[i]">@list_name[i]</a>}
+                    if (i > 0)
+                    { <span>/</span> }
+                }
+            }
+                }
+            </td>
+            <td style="padding-left:10px;">
+                @using (Html.BeginForm("Search", "Product"))
+                {
+                    <input type="text" id="searchText" name="searchText" />
+                    <input type="submit" value="商品搜尋" class="btn btn-primary" />
+                }
+            </td>
+        </tr>
+    </table>
+</p>
+<hr />
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            string str_url = Shop.GetProductImage(item.product_no);
+
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100">
+                    <a href="/Product/ProductDetail/@item.product_no">
+                        <img class="card-img-top" src="@str_url" alt="@item.product_name">
+                    </a>
+                    <div class="card-body">
+                        <a href="/Product/ProductDetail/@item.product_no">
+                            <h6 class="card-title">
+                                @item.product_name
+                            </h6>
+                        </a>
+                        <h5 style="color:red;">$@Shop.GetProductPrice(item.product_no)</h5>
+                        <p>
+                            @Html.ActionLink("加入購物車", "AddCart", "Product", new { id = item.product_no }, new { @class = "btn btn-warning" })
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        @for (int i = 0; i < item.start_count; i++)
+                        {
+                            <span>&#9733;</span>
+                        }
+                        @if (item.start_count < 5)
+                        {
+                            for (int i = 0; i < (5 - item.start_count); i++)
+                            {
+                                <span>&#9734;</span>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "goshopping", "goshopping\goshopping.csproj", "{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3299DB-C4CA-46D3-AD30-6AB821CC31B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E268604B-7393-49A9-B15F-9C54FE1A8635}
+	EndGlobalSection
+EndGlobal

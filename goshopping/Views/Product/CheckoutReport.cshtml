@@ -1,0 +1,16 @@
+﻿@using DevStudio;
+
+@{
+    ViewBag.Title = "CheckoutReport";
+}
+
+<h2>訂單建立完成!!</h2>
+<h5>
+    您的訂單編號：@Cart.OrderNo
+</h5>
+<h5>
+    請留意您的 Email 信箱，訂單狀態有變動時會即時通知!! <br />
+    如您未付款請於期限內支付款項，收到款項後會立即辦理出貨事宜！！
+</h5>
+
+@Html.ActionLink("繼續購物" , "Index" , "Home" , null , new { @class="btn btn-success"})

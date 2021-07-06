@@ -1,0 +1,29 @@
+﻿@{
+    string str_space = "  ";
+}
+<nav class="dash-nav-list">
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-shopping-cart"></i> 會員訂單查詢
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "未結訂單查詢", "Index", "Orders", new { Area = "Member", id = 0, code = 0 }, new { @class = "dash-nav-dropdown-item fas fa-search" })
+            @Html.ActionLink(str_space + "歷史訂單查詢", "Index", "Orders", new { Area = "Member", id = 0, code = 1 }, new { @class = "dash-nav-dropdown-item fas fa-search" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-user"></i> 帳號資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "帳號明細", "MemberProfile", "Member", new { Area = "Member" }, new { @class = "dash-nav-dropdown-item far fa-file-alt" })
+            @Html.ActionLink(str_space + "重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dash-nav-dropdown-item fas fa-key" })
+        </div>
+    </div>
+    <a href="/User/Login" class="dash-nav-item">
+        <i class="fas fa-sign-out-alt"></i> 登出會員專區
+    </a>
+    <a href="/Home/Index" class="dash-nav-item">
+        <i class="fas fa-home"></i> 返回前台首頁
+    </a>
+</nav>

@@ -1,0 +1,176 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body
+{
+    scroll-snap-type: x mandatory;
+    /* height: 100vh; */
+    font-family: 'Poppins';
+}
+
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+
+}
+
+
+
+.container section{
+    scroll-snap-stop: always;
+    min-width: 100vw;
+    height: 3000vh;
+    /* display: inline-flex; */
+    /* display: flex; */
+    display: inline-block;
+    justify-content: center;
+    /* align-items: center; */
+    background: #1B2432;
+    
+}
+.container section:nth-child(2){
+    background:#EAF4E2;
+}
+.container section:nth-child(3){
+    background:#2F1400;
+}
+
+.container section .content{
+    text-align: center;
+    padding: 20px;
+}
+
+.container section .content h2{
+    font-size: 4em;
+    color: #111;
+}
+
+.logo{
+    position: fixed;
+    margin-top: 11vh;
+    margin-left: 30vw;
+    display: inline-block;
+    z-index: 2000;
+}
+.logo img{
+    width: 55%;
+    
+}
+
+.steam-top{
+    z-index: 1000;
+    position: fixed;
+}
+
+.steam-top img{   
+    width: 60%;
+    
+}
+
+.steam-but{
+    z-index: 100;
+    position: fixed;
+}
+
+.steam-but img{
+    width: 60%;
+    
+}
+
+.steam{
+    position: fixed;
+    top: 18vh;
+    margin-left: 33vw;
+    display: inline-block;
+
+
+
+}
+
+.BG{
+    display: inline-block;
+}
+
+.BG img{
+    width: 100vw;
+}
+
+#particles-js{
+    z-index: 500;
+    width: 100vw;
+    height: 50vw;
+    /* background-color: #b61924; */
+    background-image: url('');
+    background-size: cover;
+    /* background-position: 50% 50%; */
+    background-repeat: no-repeat;
+  }
+
+canvas{
+    display:block;
+    /* vertical-align:bottom; */
+  }
+  
+
+.hint_icon{
+    max-width: 2vw;
+    position: fixed;
+    top: 65vh;
+    left: 85vw;
+}
+
+.arrow {
+    animation: slide 1s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+  
+    50% {
+      transform: translate(0px, 10px);
+    }
+}
+  
+.slogan_text{
+    position: fixed;
+    top: 200px;
+    margin-left: 10vw;
+    max-width: 480px;
+    z-index: 300;
+}
+.white{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    z-index: 200;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7038165608040091) 10%, rgba(255,255,255,0) 58%);
+}
+
+.passerby{
+
+    position: fixed;
+    top: 350px;
+    width: 100vw;
+    opacity: 0.8;
+    z-index: 100;
+
+}
+
+.go_shop{
+    max-width: 200px;
+    margin-top: 35vh;
+    margin-left: 43vw;
+
+}

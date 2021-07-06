@@ -1,0 +1,92 @@
+﻿@using DevStudio.Securitys;
+@{
+    string str_header = "後台管理專區";
+    string str_controller = "Admin";
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Member) { str_header = "會員專區"; str_controller = "Member"; }
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Vendor) { str_header = "廠商專區"; str_controller = "Vendor"; }
+    if (UserAccount.RoleNo == AppEnum.enUserRole.Admin) { str_header = "後台管理專區"; str_controller = "Admin"; }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/DataTables/css/jquery.dataTables.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/easion/css/easion.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/umd/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/locales/bootstrap-datepicker.zh-TW.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+    <script src="@Url.Content("~/easion/js/easion.js")"></script>
+    <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
+    <script src="@Url.Content("~/easion/js/chart-js-config.js")"></script>
+
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="dash">
+        <div class="dash-nav dash-nav-dark">
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                @Html.ActionLink(str_header, "Index", str_controller, new { Area = "Admin" }, new { @class = "easion-logo side-logo" })
+            </header>
+
+            @if (UserAccount.RoleNo == AppEnum.enUserRole.Member)
+            {@Html.Partial("~/Views/Shared/_PartialMenuMember.cshtml")}
+            @if (UserAccount.RoleNo == AppEnum.enUserRole.Vendor)
+            {@Html.Partial("~/Views/Shared/_PartialMenuVendor.cshtml")}
+            @if (UserAccount.RoleNo == AppEnum.enUserRole.Admin)
+            {@Html.Partial("~/Views/Shared/_PartialMenuAdmin.cshtml")}
+
+        </div>
+        <div class="dash-app">
+            <header class="dash-toolbar">
+                <a href="#!" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <h3><span class="side-position">目前位置：</span><b>@ViewBag.Title</b></h3>
+                <div class="tools">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="@Url.Content(UserAccount.UserImageUrl)" class="user-logo-image" />
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td><span class="side-user">@UserAccount.UserNo</span><br /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="side-user">@UserAccount.UserName</span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </header>
+            <main class="dash-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+</body>
+</html>

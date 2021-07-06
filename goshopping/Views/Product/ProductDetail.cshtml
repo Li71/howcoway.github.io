@@ -1,0 +1,128 @@
+﻿@using DevStudio;
+@using goshopping.Models;
+@model goshopping.Models.Products
+
+@{
+    ViewBag.Title = "商品明細";
+    <link href="@Url.Content("~/shop/css/product-detail.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/shop/js/product-detail.js")"></script>
+    string proc_photo = "";
+    if (Model != null)
+    {
+        proc_photo = Shop.GetProductImage(Model.product_no);
+    }
+    string categoty_no = ViewBag.CategoryNo;
+    string categoty_name = ViewBag.CategoryName;
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Content/easyzoom.css")" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/apps/easyzoom.js")"></script>
+    <script>
+        $(document).ready(function () {
+            var $easyzoom = $('.easyzoom').easyZoom();
+        });
+    </script>
+}
+
+<div class="container">
+    <p class="CurrentPosition">
+        目前位置:
+        @Html.ActionLink("首頁", "Index", "Home")
+        /
+        @Html.ActionLink(categoty_name, "CategoryList", "Product", new { id = categoty_no }, null)
+        /
+        @Model.product_name
+    </p>
+    <hr />
+    <div class="row">
+        <div class="col-6 item-photo">
+            <div class="easyzoom easyzoom--overlay">
+                <a href="@proc_photo">
+                    <img class="mainimage" src="@proc_photo" style="max-width: 100%;width: 400px;" />
+                </a>
+            </div>
+        </div>
+        <div class="col-6" style="border: 0px solid gray">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="product_no" name="product_no" value="@Model.product_no" />
+                <h4>@Model.product_name</h4>
+                <h5 style="color: #337ab7">@Model.product_spec</h5>
+                <div class="title-price product-detail-label">商品編號：@Model.product_no</div>
+
+                if (Model.price_discont != null && Model.price_discont > 0)
+                { <div class="title-price product-detail-label">商品售價：<span class="product-sale-price"><del>@Model.price_sale</del>&nbsp;@Model.price_discont</span></div> }
+            else
+            { <div class="title-price product-detail-label">商品售價：<span class="product-sale-price">@Model.price_sale</span></div> }
+
+        List<SelectListItem> lists = Shop.GetPropertyList(Model.product_no);
+        if (lists.Count > 0)
+        {
+            string varid = "";
+            int int_index = 0;
+            foreach (var item in lists)
+            {
+                int_index++;
+                varid = string.Format("property{0}", int_index);
+                <div class="section">
+                    <div>
+                        <span class="product-detail-label control-label" style="margin-top: 15px;">@item.Text：</span>
+                        <select id="@item.Value" name="@item.Value" class="form-control product-detail-select">
+                            @{
+
+                                List<string> str_values = Shop.GetProductPropertyValue(Model.product_no, item.Value).Split(',').ToList();
+                                if (str_values.Count > 0)
+                                {
+                                    foreach (var value in str_values)
+                                    {
+                                        <option>@value</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="section" style="padding-bottom: 20px;padding-top:10px;">
+            <h6 class="title-attr product-detail-label">購買數量：</h6>
+            <br>
+            <div>
+                <div class="btn-minus" style="float:right"><span class="fa fa-minus"></span></div>
+                <input id="qty" name="qty" value="1" style="width:100px;max-width:100px;" />
+                <div class="btn-plus" style="float:left"><span class="fa fa-plus"></span></div>
+            </div>
+        </div>
+        <br>
+        <div class="section" style="padding-bottom: 20px;">
+            <input type="submit" value="加入購物車" class="btn btn-success" />
+        </div>
+    }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="menu-items">
+                <li class="active">商品資訊</li>
+            </ul>
+            <div style="width: 100%;border-top: 1px solid silver">
+                <br>
+                @Html.Raw(Model.remark)
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+

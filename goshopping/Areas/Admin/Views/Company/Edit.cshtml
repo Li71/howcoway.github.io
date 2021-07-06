@@ -1,0 +1,93 @@
+﻿@model goshopping.Models.Companys
+
+@{
+    ViewBag.Title = "公司資料" + ((Model.rowid > 0) ? "修改" : "新增");
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Company", new { area = "Admin" }, FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.AntiForgeryToken()
+    if (Model != null && Model.rowid > 0)
+    {
+        @Html.HiddenFor(model => model.rowid)
+    }
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.mno, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.mno, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.mno)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.msname, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.msname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.msname)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.mname, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.mname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.mname)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.date_register, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.date_register, "{0:yyyy/MM/dd}", new { @class = "form-control datepicker" })
+        @Html.ValidationMessageFor(model => model.date_register)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tel_company, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.tel_company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.tel_company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.fax_company, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.fax_company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.fax_company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.name_charge, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.name_charge, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.name_charge)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.name_contact, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.name_contact, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.name_contact)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tel_contact, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.tel_contact, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.tel_contact)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.adr_company, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.adr_company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.adr_company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.email_company, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.email_company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.email_company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.url_company, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.url_company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.url_company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.remark, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.remark)
+    </div>
+    <div>
+        <input type="submit" value="存檔" class="btn btn-success form-button" />
+    </div>
+}
+<script>
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd',
+        language: 'zh-TW',
+        todayHighlight: true,
+        autoclose: true
+    });
+</script>

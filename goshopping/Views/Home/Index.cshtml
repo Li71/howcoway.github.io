@@ -1,0 +1,132 @@
+﻿@using DevStudio;
+@model goshopping.Models.cvmHomeIndex
+
+@using DevStudio;
+
+@{
+    ViewBag.Title = "購買頁";
+    int int_index = 0;
+    string activeClass = "active";
+}
+<head>
+    <link href="@Url.Content("~/Content/howcoway/index_test.css")" rel="stylesheet" />
+</head>
+<p class="CurrentPosition">
+   
+                目前位置: @Html.ActionLink("購買頁", "Index", "Home")
+
+</p>
+<hr />
+<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @if (Model.CarouseImages != null)
+        {
+            foreach (string fileName in Model.CarouseImages)
+            {
+                <li data-target="#carouselExampleIndicators" data-slide-to="@int_index" class="@activeClass"></li>
+                int_index++;
+                activeClass = "";
+            }
+        }
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        @if (Model.CarouseImages != null)
+        {
+            activeClass = "active";
+            foreach (string fileName in Model.CarouseImages)
+            {
+                <div class="carousel-item @activeClass">
+                    <img class="d-block img-fluid" src="@Url.Content(fileName)" alt="CarouseImage">
+                </div>
+                activeClass = "";
+            }
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">往前</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">往後</span>
+    </a>
+</div>
+
+<div>
+    @using (Html.BeginForm("Search", "Product"))
+    {
+        <div>
+
+
+            <div>
+                <input type="text" id="searchText" placeholder="搜尋關鍵字" name="searchText" />
+            </div>
+
+            <div>
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input type="submit" value="" class="btn btn-primary" />
+            </div>
+
+        </div>
+    }
+</div>
+
+<div class="row">
+    @{
+        foreach (var item in Model.TopProducts)
+        {
+            string str_url = Shop.GetProductImage(item.product_no);
+
+            <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card h-100">
+                        <a href="/Product/ProductDetail/@item.product_no">
+                            <img class="card-img-top" src="@str_url" alt="@item.product_name">
+                        </a>
+                        <div class="card-body">
+                            <a href="/Product/ProductDetail/@item.product_no">
+                                <h6 class="card-title">
+                                    @item.product_name
+                                </h6>
+                            </a>
+                            @if (item.price_discont != null && item.price_discont > 0)
+                            {
+                                <h6 style="color:red;">
+                                    <del>
+                                        $@item.price_sale
+                                    </del>&nbsp;
+                                    $@item.price_discont
+                                </h6>
+                            }
+                            else
+                            {
+                                <h6 style="color:red;">
+                                    $@item.price_sale
+                                </h6>
+                            }
+
+                        </div>
+                        <div>
+                            @Html.ActionLink("加入購物車", "AddCart", "Product", new { id = item.product_no }, new { @class = "btn btn_color howcoway_dark" })
+                        </div>
+
+
+                        <div class="card-footer">
+                            <small class="star  text-muted">
+                                @for (int i = 0; i < item.start_count; i++)
+                                {
+                                    <span>&#9733;</span>
+                                }
+                                @if (item.start_count < 5)
+                                {
+                                    for (int i = 0; i < (5 - item.start_count); i++)
+                                    {
+                                        <span>&#9734;</span>
+                                    }
+                                }
+                            </small>
+                        </div>
+                    </div>
+            </div>
+        }
+    }
+</div>

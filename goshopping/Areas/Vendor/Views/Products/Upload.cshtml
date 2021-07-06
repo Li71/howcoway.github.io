@@ -1,0 +1,17 @@
+﻿@model goshopping.Models.Products
+
+@{
+    ViewBag.Title = "上傳圖片";
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+<div>
+    <h3>帳號圖像上傳</h3>
+    <hr />
+    @using (Html.BeginForm("Upload", "Products", new { area = "Vendor" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="file" name="file" id="file" class="form-control" />
+        <input type="submit" value="上傳檔案" class="btn btn-primary form-control" />
+    }
+</div>

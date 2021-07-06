@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Page.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/DataTables/css/jquery.dataTables.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/easion/css/easion.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/umd/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/locales/bootstrap-datepicker.zh-TW.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+    <script src="@Url.Content("~/easion/js/easion.js")"></script>
+    <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
+    <script src="@Url.Content("~/easion/js/chart-js-config.js")"></script>
+
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

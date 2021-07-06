@@ -1,0 +1,273 @@
+﻿@using goshopping.Models;
+
+@{
+    ViewBag.Title = "首頁";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row dash-row">
+        <div class="col-xl-3">
+            <div class="stats stats-primary">
+                <h3 class="stats-title">@DateTime.Today.ToString("yyyy/MM") 總交易金額</h3>
+                <div class="stats-content">
+                    <div class="stats-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stats-data">
+                        <div class="stats-number">$@ViewBag.MonthAmount</div>
+                        <div class="stats-change">
+                            <span class="stats-percentage">@ViewBag.MonthAmountPercent</span>
+                            <span class="stats-timeframe">與前期銷售額相比</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="stats stats-success ">
+                <h3 class="stats-title">@DateTime.Today.ToString("yyyy/MM") 總交易訂單數</h3>
+                <div class="stats-content">
+                    <div class="stats-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stats-data">
+                        <div class="stats-number">@ViewBag.MonthCount</div>
+                        <div class="stats-change">
+                            <span class="stats-percentage">@ViewBag.MonthCountPercent</span>
+                            <span class="stats-timeframe">與前期銷售額相比</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="stats stats-danger">
+                <h3 class="stats-title">@DateTime.Today.Year 年度總交易金額</h3>
+                <div class="stats-content">
+                    <div class="stats-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="stats-data">
+                        <div class="stats-number">$@ViewBag.YearAmount</div>
+                        <div class="stats-change">
+                            <span class="stats-percentage">@ViewBag.YearAmountPercent</span>
+                            <span class="stats-timeframe">與前期銷售額相比</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="stats stats-info">
+                <h3 class="stats-title">@DateTime.Today.Year 年度總交易訂單數</h3>
+                <div class="stats-content">
+                    <div class="stats-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="stats-data">
+                        <div class="stats-number">@ViewBag.YearCount</div>
+                        <div class="stats-change">
+                            <span class="stats-percentage">@ViewBag.YearCountPercent</span>
+                            <span class="stats-timeframe">與前期銷售額相比</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon">
+                        <i class="fas fa-chart-bar fa-2x"></i>
+                    </div>
+                    <div class="easion-card-title StatHeader">上週交易統計</div>
+                </div>
+                <div class="card-body easion-card-body-chart">
+                    <canvas id="priorChartjsBar"></canvas>
+                    <script>
+                        var jsPriorWeekName = @Html.Raw(ViewBag.PriorWeekName);
+                        var jsPriorWeekAmount = @Html.Raw(ViewBag.PriorWeekAmount);
+                        var ctx = document.getElementById("priorChartjsBar").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: jsPriorWeekName,
+                                datasets: [{
+                                    label: '銷售金額(單位:元)',
+                                    data: jsPriorWeekAmount,
+                                    backgroundColor: window.chartColors.primary,
+                                    borderColor: 'transparent'
+                                }]
+                            },
+                            options: {
+                                 responsive: true,
+			                    title: {
+				                    display: false,
+				                    text: '上週交易統計圖'
+			                    },
+                                legend: {
+                                    display: true
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });</script>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon">
+                        <i class="fas fa-chart-bar fa-2x"></i>
+                    </div>
+                    <div class="easion-card-title StatHeader">本週交易統計</div>
+                </div>
+                <div class="card-body easion-card-body-chart">
+                    <canvas id="baseChartjsBar"></canvas>
+                    <script>
+                        var jsBaseWeekName = @Html.Raw(ViewBag.BaseWeekName);
+                        var jsBaseWeekAmount = @Html.Raw(ViewBag.BaseWeekAmount);
+                        var ctx = document.getElementById("baseChartjsBar").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: jsBaseWeekName,
+                                datasets: [{
+                                    label: '銷售金額(單位:元)',
+                                    data: jsBaseWeekAmount,
+                                    backgroundColor: window.chartColors.primary,
+                                    borderColor: 'transparent'
+                                }]
+                            },
+                            options: {
+                                 responsive: true,
+			                    title: {
+				                    display: false,
+				                    text: '本週交易統計圖'
+			                    },
+                                legend: {
+                                    display: true
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });</script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon">
+                        <i class="fas fa-chart-bar fa-2x"></i>
+                    </div>
+                    <div class="easion-card-title StatHeader">@DateTime.Today.Year 年度交易統計</div>
+                </div>
+                <div class="card-body easion-card-body-chart">
+                    <canvas id="baseYearChartjsBar"></canvas>
+                    <script>
+                         var jsBaseYearMonthName = @Html.Raw(ViewBag.BaseYearMonthName);
+                        var jsBaseYearMonthAmount = @Html.Raw(ViewBag.BaseYearMonthAmount);
+                        var ctx = document.getElementById("baseYearChartjsBar").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: jsBaseYearMonthName,
+                                datasets: [{
+                                    label: 'Blue',
+                                    data: jsBaseYearMonthAmount,
+                                    backgroundColor: window.chartColors.primary,
+                                    borderColor: window.chartColors.primary,
+                                    fill: false
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="easion-card-title StatHeader">年度商品銷售金額排行前廿名</div>
+                </div>
+                <div class="card-body ">
+                    <div class="notifications">
+                        @{
+                            List<cvmSaleRank> rankList1 = (List<cvmSaleRank>)ViewBag.BaseYearAmountRank;
+                            if (rankList1 != null && rankList1.Count > 0)
+                            {
+                                foreach (var item in rankList1)
+                                {
+                                    <a href="#!" class="notification">
+                                        <div class="notification-icon">
+                                            <div>@item.RankNumber</div>
+                                        </div>
+                                        <div class="notification-text StatRank"><span class="StatRankProductNo">@item.ProductNo</span> @item.ProductName</div>
+                                        <span class="notification-time StatRank StatRankValue">@item.RankValue</span>
+                                    </a>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="easion-card-title StatHeader">年度商品銷售數量排行前廿名</div>
+                </div>
+                <div class="card-body ">
+                    <div class="notifications">
+                        @{
+                            List<cvmSaleRank> rankList2 = (List<cvmSaleRank>)ViewBag.BaseYearQtyRank;
+                            if (rankList2 != null && rankList1.Count > 0)
+                            {
+                                foreach (var item in rankList2)
+                                {
+                                    <a href="#!" class="notification">
+                                        <div class="notification-icon">
+                                            <div>@item.RankNumber</div>
+                                        </div>
+                                        <div class="notification-text StatRank"><span class="StatRankProductNo">@item.ProductNo</span> @item.ProductName</div>
+                                        <span class="notification-time StatRank StatRankValue">@item.RankValue</span>
+                                    </a>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

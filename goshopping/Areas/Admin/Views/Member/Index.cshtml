@@ -1,0 +1,44 @@
+﻿@using DevStudio.Securitys;
+@model goshopping.Models.Users
+
+@{
+    if (UserAccount.UserStatus == 0)
+    { ViewBag.Title = "會員資料管理 / 待審會員列表"; }
+    if (UserAccount.UserStatus == 1)
+    { ViewBag.Title = "會員資料管理 / 正式會員列表"; }
+    if (UserAccount.UserStatus == 2)
+    { ViewBag.Title = "會員資料管理 / 所有會員列表"; }
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    @if (UserAccount.UserStatus == 2)
+                    {
+                        <a class="popup" title="新增記錄" href="/Admin/Member/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                    }
+                </th>
+                <th>驗證</th>
+                <th>編號</th>
+                <th>姓名</th>
+                <th>出生日期</th>
+                <th>電子郵件</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@if (UserAccount.UserStatus == 0)
+{
+    <script src="@Url.Content("~/Scripts/apps/admin/member_unconfirm.js")"></script>}
+@if (UserAccount.UserStatus == 1)
+{
+    <script src="@Url.Content("~/Scripts/apps/admin/member_confirmed.js")"></script>}
+@if (UserAccount.UserStatus == 2)
+{
+    <script src="@Url.Content("~/Scripts/apps/admin/member_all.js")"></script>}

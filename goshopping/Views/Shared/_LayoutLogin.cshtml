@@ -1,0 +1,72 @@
+﻿@using DevStudio;
+@using DevStudio.Securitys
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="@Shop.AppName" />
+    <meta name="author" content="Johnson" />
+    <title>@ViewBag.Title - @Shop.AppName</title>
+
+    <link href="@Url.Content("~/Content/shop/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/shop/shop-homepage.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/jquery-ui.theme.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/fontawesome-all.min.css")" />
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" rel="stylesheet" />
+    <link href="https: //fonts.googleapis.com/earlyaccess/cwtexkai.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/shop/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.zh-TW.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/shop/bootstrap.bundle.min.js")"></script>
+
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: #2F1400">
+       
+            <a class="navbar-brand" href="/Home/Index">@Shop.AppName</a>
+            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/Index">
+                                首頁
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>*@
+        
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    @*<footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-right text-white">Copyright &copy; @Shop.AppName @DateTime.Now.Year</p>
+            </div>
+             /.container
+        </footer>*@
+</body>
+</html>

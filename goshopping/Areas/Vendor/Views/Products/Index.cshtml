@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "商品資料管理 / 商品資料維護";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    <a class="popup" title="新增記錄" href="/Vendor/Products/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                </th>
+                <th>圖片</th>
+                <th>商品編號</th>
+                <th>商品名稱</th>
+                <th>商品分類</th>
+                <th>成本價格</th>
+                <th>銷售價格</th>
+                <th>促銷價格</th>
+                <th>首頁</th>
+                <th>熱門</th>
+                <th>上架</th>
+                <th>星數</th>
+                <th>瀏覽次數</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="@Url.Content("~/Scripts/apps/vendor/product_index.js")"></script>

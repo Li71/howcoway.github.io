@@ -1,0 +1,29 @@
+﻿@using DevStudio;
+@{
+    ViewBag.Title = "商品資料管理 / 商品屬性設定";
+    Layout = "~/Views/Shared/_LayoutBackend.cshtml";
+}
+    <div>
+        @Html.ActionLink("返回商品資料維護", "Index", "Products", new { Area = "Vendor" }, new { @class = "btn btn-primary" })
+        <p class="form-header">
+            商品編號：@Shop.ProductNo<br />
+            商品名稱：@Shop.ProductName
+        </p>
+    </div>
+<div style="width:100%; margin:0 auto" class="tablecontainer">
+    <table id="DatatableList" class="table table-bordered  display dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th>
+                    <a class="popup" title="複製屬性" href="/Vendor/ProductProperty/Edit/0"><i class="fas fa-plus fa-2x"></i></a>
+                </th>
+                <th>屬性編號</th>
+                <th>屬性名稱</th>
+                <th>屬性值</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="@Url.Content("~/Scripts/apps/vendor/product_property_index.js")"></script>

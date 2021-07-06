@@ -1,0 +1,49 @@
+﻿@using goshopping.Models;
+@model goshopping.Models.Products
+
+@{
+    ViewBag.Title = "商品描述";
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@section scripts {
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>
+        var editor = CKEDITOR.editor.replace(
+            'remark' ,
+            {
+                skin: 'kama',
+                width: '750px',
+                filebrowserImageUploadUrl: '/Vendor/Products/UploadImage'
+            }
+        );
+    </script>
+}
+
+@using (Html.BeginForm("Remark", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.rowid)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_no, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.product_no != null)
+        {<span class="control-label control-value">@Model.product_no</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.product_name != null)
+        {<span class="control-label control-value">@Model.product_name</span>}
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextArea("remark", new { id = "remark", @name = "remark" })
+        @Html.ValidationMessageFor(model => model.remark)
+    </div>
+    <div>
+        <input type="submit" value="存檔" class="btn btn-success form-button" />
+    </div>
+}

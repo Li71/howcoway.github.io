@@ -1,0 +1,125 @@
+﻿@using DevStudio;
+@using DevStudio.Securitys
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="@Shop.AppName" />
+    <meta name="author" content="Johnson" />
+    <title>@ViewBag.Title - @Shop.AppName</title>
+
+    
+    <link href="@Url.Content("~/Content/shop/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/shop/shop-homepage.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/shop/bstreeview.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/back-to-top.css")" rel="stylesheet" />
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" rel="stylesheet" />
+
+    <script src="@Url.Content("~/Scripts/shop/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/shop/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/apps/bstreeview.js")"></script>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/fontawesome-all.min.css")" />
+    <script src="@Url.Content("~/Scripts/apps/category-menu.js")"></script>
+    <script src="@Url.Content("~/Scripts/apps/back-to-top.js")"></script>
+
+    @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #2F1400">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index">@Shop.AppName</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Home/Index">
+                            購買頁
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Product/CartList">購物車(@Cart.Counts)</a>
+                    </li>
+                    @if (UserAccount.IsLogin)
+                    {
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                我的帳號<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li> @Html.ActionLink("會員專區", "Index", "Member", new { Area = "Member" }, new { @class = "dropdown-item" })</li>
+                                <li> @Html.ActionLink("修改密碼", "ResetPassword", "User", null, new { @class = "dropdown-item" })</li>
+                                <li> @Html.ActionLink("登出系統", "LogOut", "User", null, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("登入", "Login", "User", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            @*<div class="col-lg-3">
+                <div id="tree">
+                    <div class="list-group">
+                        <div class="list-group-item active">
+                            <h6 class="tree-header">商品分類</h6>
+                        </div>
+                    </div>
+                </div>
+                @{
+                    var hotList = Shop.GetHotProducts();
+                    if (hotList != null & hotList.Count > 0)
+                    {
+                        <div id="tree-hot">
+                            <div class="list-group">
+                                <div class="list-group-item active">
+                                    <h6 class="tree-header">熱門商品</h6>
+                                </div>
+                                @{
+                                    foreach (var item in hotList)
+                                    {
+                                        string str_url = Shop.GetProductImage(item.product_no);
+                                        <div class="list-group-item">
+                                            <a class="RemoveUnderLine" href="/Product/ProductDetail/@item.product_no">
+                                                <div class="pull-left ">
+                                                    <img class="img-reponsive img-rounded" src="@str_url" alt="@item.product_name" style="width:210px;" />
+                                                </div>
+                                            </a>
+                                            <p class="mb-1">@item.product_name</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>*@
+            <div class="col-lg-12">
+                @RenderBody()
+            </div>
+        </div>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-alt-circle-up fa-3x"></i></a>
+    </div>
+    <footer class="footer bottom footer-bar" style="background-color: #2F1400">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; @Shop.AppName @DateTime.Now.Year</p>
+        </div>
+    </footer>
+</body>
+</html>

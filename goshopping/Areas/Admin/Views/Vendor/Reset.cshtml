@@ -1,0 +1,56 @@
+﻿@model goshopping.Models.Users
+
+@{
+    ViewBag.Title = "廠商重設密碼";
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@using (Html.BeginForm("Reset", "Vendor", new { area = "Admin" }, FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(model => model.rowid)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.isvarify, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBox("bln_isvarify", Model.bool_isvarify, htmlAttributes: new { @class = "control-label control-value" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.mno, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.mno != null)
+        {<span class="control-label control-value">@Model.mno</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.mname, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.mname != null)
+        {<span class="control-label control-value">@Model.mname</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.birthday != null)
+        {<span class="control-label control-value">@DateTime.Parse(Model.birthday.ToString()).ToString("yyyy/MM/dd")</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.email != null)
+        {<span class="control-label control-value">@Model.email</span>}
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.remark, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.Label("：", htmlAttributes: new { @class = "control-label control-header" })
+        @if (Model.email != null)
+        {<span class="control-label control-value">@Model.email</span>}
+    </div>
+
+    <div>
+        <input type="submit" value="重設密碼" class="btn btn-danger form-button" />
+    </div>
+}

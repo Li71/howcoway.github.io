@@ -1,0 +1,79 @@
+﻿@model goshopping.Models.Products
+
+@{
+    ViewBag.Title = "商品資料" + ((Model.rowid > 0) ? "修改" : "新增");
+    Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Products", new { area = "Vendor" }, FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.AntiForgeryToken()
+    if (Model != null && Model.rowid > 0)
+    {
+        @Html.HiddenFor(model => model.rowid)
+        @Html.HiddenFor(model => model.product_spec)
+        @Html.HiddenFor(model => model.category_name)
+        @Html.HiddenFor(model => model.vendor_no)
+        @Html.HiddenFor(model => model.remark)
+    }
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_no, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.product_no, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.product_no)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.product_name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.product_name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.categoryid, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.DropDownList("categoryid", (IEnumerable<SelectListItem>)ViewBag.CategoryList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.categoryid)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.price_cost, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.price_cost, new { @class = "form-control", @type = "number" })
+        @Html.ValidationMessageFor(model => model.price_cost)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.price_sale, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.price_sale, new { @class = "form-control", @type = "number" })
+        @Html.ValidationMessageFor(model => model.price_sale)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.price_discont, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.price_discont, new { @class = "form-control", @type = "number" })
+        @Html.ValidationMessageFor(model => model.price_discont)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.bool_istop, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.bool_istop, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.bool_istop)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.bool_ishot, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.bool_ishot, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.bool_ishot)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.bool_issale, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.CheckBoxFor(model => model.bool_issale, new { @class = "form-control form-control-checkbox" })
+        @Html.ValidationMessageFor(model => model.bool_issale)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.start_count, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.start_count, new { @class = "form-control", @type = "number" })
+        @Html.ValidationMessageFor(model => model.start_count)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.browse_count, htmlAttributes: new { @class = "control-label control-header" })
+        @Html.TextBoxFor(model => model.browse_count, new { @class = "form-control", @type = "number" })
+        @Html.ValidationMessageFor(model => model.browse_count)
+    </div>
+    <div>
+        <input type="submit" value="存檔" class="btn btn-success form-button" />
+    </div>
+}

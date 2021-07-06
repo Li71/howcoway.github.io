@@ -1,0 +1,34 @@
+﻿@{ 
+    string str_space = "  ";
+}
+<nav class="dash-nav-list">
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-shopping-cart"></i> 廠商訂單查詢
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "未結訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 0 }, new { @class = "dash-nav-dropdown-item fas fa-search" })
+            @Html.ActionLink(str_space + "歷史訂單查詢", "Index", "Orders", new { Area = "Vendor", id = 1 }, new { @class = "dash-nav-dropdown-item fas fa-search" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-shopping-bag"></i> 商品資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "商品資料維護", "Index", "Products", new { Area = "Vendor" }, new { @class = "dash-nav-dropdown-item fas fa-edit" })
+        </div>
+    </div>
+    <div class="dash-nav-dropdown">
+        <a href="#" class="dash-nav-item dash-nav-dropdown-toggle">
+            <i class="fas fa-user"></i> 帳號資料管理
+        </a>
+        <div class="dash-nav-dropdown-menu">
+            @Html.ActionLink(str_space + "帳號明細", "VendorProfile", "Vendor", new { Area = "Vendor" }, new { @class = "dash-nav-dropdown-item far fa-file-alt" })
+            @Html.ActionLink(str_space + "重設密碼", "ResetPassword", "User", new { Area = "" }, new { @class = "dash-nav-dropdown-item fas fa-key" })
+        </div>
+    </div>
+    <a href="/User/Login" class="dash-nav-item">
+        <i class="fas fa-sign-out-alt"></i> 登出廠商專區
+    </a>
+</nav>
